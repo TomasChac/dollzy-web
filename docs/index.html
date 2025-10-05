@@ -4,173 +4,399 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Dollzy Design Studio</title>
-  <link rel="icon" type="image/png" href="../assets/logo.png" />
   <style>
     /* ---------------------------
        PALETA DE COLORES PANTONE
     ----------------------------*/
     :root {
-      --black: #1e1e1e;           /* Process Black C */
-      --lime: #d7df23;            /* 387 XGC */
-      --red: #da291c;             /* 485 XGC */
-      --pink: #e57ea6;            /* 211 XGC */
-      --purple: #662d91;          /* 229 XGC */
-      --violet: #3b3c8f;          /* 2119 XGC */
-      --blue: #2a44d0;            /* 2081 XGC */
-      --gray: #7c7f83;            /* Cool Gray 9 XGC */
-      --lavender: #d6d0e5;        /* 663 XGC */
-      --paper: #fffdf7;           /* Fondo tipo libreta */
+      --black: #1e1e1e;
+      --lime: #d7df23;
+      --red: #da291c;
+      --pink: #e57ea6;
+      --purple: #662d91;
+      --violet: #3b3c8f;
+      --blue: #2a44d0;
+      --gray: #7c7f83;
+      --lavender: #d6d0e5;
+      --paper: #f5f0e8;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
 
     /* ---------------------------
-       ESTILO GENERAL
+       ESTILO GENERAL - LIBRETA
     ----------------------------*/
     body {
       font-family: "Courier New", monospace;
-      background: var(--paper)
-        linear-gradient(to bottom, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
-      background-size: 100% 24px;
+      background: linear-gradient(to right, #ddd 1px, transparent 1px),
+                  linear-gradient(to bottom, rgba(0,0,0,0.03) 1px, transparent 1px),
+                  var(--paper);
+      background-size: 40px 100%, 100% 28px, 100% 100%;
+      background-position: 60px 0, 0 0, 0 0;
       color: var(--black);
-      margin: 0;
-      padding: 0;
-      line-height: 1.6;
+      padding: 2rem 1rem;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    /* Efecto de argollas de libreta */
+    body::before {
+      content: '';
+      position: fixed;
+      left: 40px;
+      top: 0;
+      width: 20px;
+      height: 100%;
+      background: 
+        radial-gradient(circle, #888 30%, transparent 31%) 0 40px,
+        radial-gradient(circle, #888 30%, transparent 31%) 0 140px,
+        radial-gradient(circle, #888 30%, transparent 31%) 0 240px,
+        radial-gradient(circle, #888 30%, transparent 31%) 0 340px,
+        radial-gradient(circle, #888 30%, transparent 31%) 0 440px,
+        radial-gradient(circle, #888 30%, transparent 31%) 0 540px,
+        radial-gradient(circle, #888 30%, transparent 31%) 0 640px;
+      background-size: 8px 8px;
+      background-repeat: no-repeat;
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding-left: 80px;
     }
 
     /* ---------------------------
-       HEADER: LOGO + PERSONAJE
+       HEADER CON LOGO
     ----------------------------*/
     .header {
-      position: relative;
       text-align: center;
-      margin-top: 2rem;
       margin-bottom: 3rem;
+      position: relative;
     }
 
-    .logo-container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .logo-bg {
-      background-color: #000;
-      padding: 1rem 2rem;
+    .logo-wrapper {
+      background: #000;
+      padding: 1.5rem 2rem;
       border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
       display: inline-block;
+      box-shadow: 
+        4px 4px 0 rgba(0,0,0,0.2),
+        0 6px 20px rgba(0,0,0,0.3);
+      transform: rotate(-1deg);
+      position: relative;
+    }
+
+    .logo-wrapper::after {
+      content: '📌';
+      position: absolute;
+      top: -15px;
+      right: -10px;
+      font-size: 2rem;
+      filter: drop-shadow(2px 2px 3px rgba(0,0,0,0.3));
     }
 
     .logo-img {
-      width: clamp(220px, 50%, 480px);
+      width: clamp(250px, 50vw, 450px);
       height: auto;
       display: block;
-    }
-
-    .character-img {
-      display: block;
-      margin: 2rem auto 0 auto;
-      width: clamp(180px, 30%, 300px);
-      height: auto;
-      filter: drop-shadow(0 3px 4px rgba(0, 0, 0, 0.3));
     }
 
     /* ---------------------------
-       NAV: OPCIONES DE SERVICIOS
+       PERSONAJE GUÍA
     ----------------------------*/
-    nav {
+    .character-guide {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 140px;
+      z-index: 100;
+      animation: float 3s ease-in-out infinite;
+      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-15px); }
+    }
+
+    .character-guide img {
+      width: 100%;
+      height: auto;
+    }
+
+    .speech-bubble {
+      position: absolute;
+      bottom: 120%;
+      right: 100%;
+      background: white;
+      border: 3px solid var(--black);
+      border-radius: 15px;
+      padding: 0.8rem 1rem;
+      font-size: 0.85rem;
+      font-weight: bold;
+      box-shadow: 3px 3px 0 var(--black);
+      white-space: nowrap;
+      opacity: 0;
+      transform: scale(0.8);
+      transition: all 0.3s ease;
+    }
+
+    .character-guide:hover .speech-bubble {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .speech-bubble::after {
+      content: '';
+      position: absolute;
+      bottom: -20px;
+      right: 20px;
+      width: 0;
+      height: 0;
+      border-left: 15px solid transparent;
+      border-right: 15px solid transparent;
+      border-top: 20px solid var(--black);
+    }
+
+    .speech-bubble::before {
+      content: '';
+      position: absolute;
+      bottom: -14px;
+      right: 23px;
+      width: 0;
+      height: 0;
+      border-left: 12px solid transparent;
+      border-right: 12px solid transparent;
+      border-top: 17px solid white;
+      z-index: 1;
+    }
+
+    /* ---------------------------
+       PESTAÑAS DE NAVEGACIÓN
+    ----------------------------*/
+    .tabs-container {
       display: flex;
+      gap: 0.5rem;
+      margin-bottom: -2px;
       justify-content: center;
-      gap: 1rem;
       flex-wrap: wrap;
-      margin-bottom: 2rem;
     }
 
-    nav a {
+    .tab {
+      padding: 0.8rem 1.5rem;
+      background: var(--lime);
+      border: 3px solid var(--black);
+      border-bottom: none;
+      border-radius: 10px 10px 0 0;
+      font-weight: bold;
+      cursor: pointer;
+      position: relative;
+      transition: all 0.3s ease;
       text-decoration: none;
-      font-weight: bold;
-      padding: 0.5rem 1.5rem;
-      border-radius: 6px;
-      box-shadow: 2px 2px 0 var(--black);
-      transition: transform 0.2s ease;
+      color: var(--black);
+      box-shadow: inset 0 -3px 0 rgba(0,0,0,0.1);
     }
 
-    nav a:hover {
+    .tab:hover {
       transform: translateY(-3px);
-    }
-
-    nav a:nth-child(1) {
-      background: var(--lime);
-      color: var(--black);
-    }
-    nav a:nth-child(2) {
       background: var(--pink);
-      color: var(--black);
     }
-    nav a:nth-child(3) {
+
+    .tab:nth-child(2) {
+      background: var(--pink);
+    }
+
+    .tab:nth-child(2):hover {
       background: var(--blue);
-      color: #fff;
+      color: white;
     }
 
-    /* ---------------------------
-       SECCIONES
-    ----------------------------*/
-    section {
-      width: min(900px, 90%);
-      background: #fffdfc;
-      margin: 3rem auto;
-      border-radius: 16px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-      padding: 2rem;
-      position: relative;
-    }
-
-    section h2 {
-      font-size: 1.6rem;
-      font-weight: bold;
-      position: relative;
-      display: inline-block;
-      padding: 0.25rem 0.75rem;
-      background: var(--lime);
-      border-radius: 6px;
-      margin-top: 0;
-    }
-
-    .card-grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-      margin-top: 1rem;
-    }
-
-    .card {
-      flex: 1 1 250px;
-      border: 2px solid var(--black);
-      border-radius: 10px;
-      padding: 1rem;
-      position: relative;
-      box-shadow: 2px 3px 0 var(--black);
-    }
-
-    .card:nth-child(1) {
+    .tab:nth-child(3) {
       background: var(--lavender);
     }
-    .card:nth-child(2) {
-      background: var(--pink);
-    }
-    .card:nth-child(3) {
+
+    .tab:nth-child(3):hover {
       background: var(--violet);
       color: white;
     }
 
-    .card button {
-      margin-top: 0.75rem;
+    /* ---------------------------
+       SECCIÓN DE CONTENIDO
+    ----------------------------*/
+    .page-section {
+      background: #fff;
+      border: 3px solid var(--black);
+      border-radius: 15px;
+      padding: 2.5rem;
+      margin-bottom: 2rem;
+      box-shadow: 
+        5px 5px 0 rgba(0,0,0,0.1),
+        0 8px 25px rgba(0,0,0,0.15);
+      position: relative;
+      transform: rotate(0.3deg);
+    }
+
+    .page-section::before {
+      content: '';
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 30px;
+      height: 30px;
       background: var(--lime);
-      border: none;
+      border-radius: 50%;
+      opacity: 0.3;
+    }
+
+    .page-title {
+      font-size: 2rem;
       font-weight: bold;
-      border-radius: 4px;
-      padding: 0.3rem 1rem;
-      box-shadow: 1px 2px 0 var(--black);
+      color: var(--black);
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 4px dashed var(--gray);
+      position: relative;
+      display: inline-block;
+    }
+
+    .page-title::after {
+      content: '✨';
+      margin-left: 0.5rem;
+    }
+
+    /* ---------------------------
+       TARJETAS DE SERVICIOS
+    ----------------------------*/
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .service-card {
+      background: white;
+      border: 4px solid var(--black);
+      border-radius: 12px;
+      padding: 1.8rem;
+      position: relative;
+      box-shadow: 6px 6px 0 var(--black);
+      transition: all 0.3s ease;
+      transform: rotate(0deg);
+    }
+
+    .service-card:hover {
+      transform: translateY(-8px) rotate(-1deg);
+      box-shadow: 8px 10px 0 var(--black);
+    }
+
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: -15px;
+      left: 20px;
+      width: 40px;
+      height: 30px;
+      background: var(--lime);
+      border: 3px solid var(--black);
+      border-radius: 3px;
+      transform: rotate(-5deg);
+    }
+
+    .service-card:nth-child(1) {
+      background: linear-gradient(135deg, var(--lavender) 0%, #fff 100%);
+    }
+
+    .service-card:nth-child(1)::before {
+      background: var(--lime);
+    }
+
+    .service-card:nth-child(2) {
+      background: linear-gradient(135deg, var(--pink) 0%, #fff 100%);
+    }
+
+    .service-card:nth-child(2)::before {
+      background: var(--red);
+    }
+
+    .service-card:nth-child(3) {
+      background: linear-gradient(135deg, #b8b3d9 0%, #fff 100%);
+    }
+
+    .service-card:nth-child(3)::before {
+      background: var(--violet);
+    }
+
+    .service-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    .service-card h3 {
+      font-size: 1.3rem;
+      margin-bottom: 1rem;
+      color: var(--black);
+      font-weight: bold;
+    }
+
+    .service-card p {
+      line-height: 1.6;
+      color: #333;
+      margin-bottom: 1.5rem;
+    }
+
+    .service-btn {
+      background: var(--lime);
+      border: 3px solid var(--black);
+      padding: 0.6rem 1.5rem;
+      font-weight: bold;
+      font-family: "Courier New", monospace;
       cursor: pointer;
+      border-radius: 6px;
+      box-shadow: 3px 3px 0 var(--black);
+      transition: all 0.2s ease;
+      font-size: 1rem;
+    }
+
+    .service-btn:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 5px 5px 0 var(--black);
+    }
+
+    .service-btn:active {
+      transform: translate(1px, 1px);
+      box-shadow: 2px 2px 0 var(--black);
+    }
+
+    /* ---------------------------
+       NOTA ADHESIVA
+    ----------------------------*/
+    .sticky-note {
+      background: #feff9c;
+      border: 1px solid #e8e895;
+      padding: 1.5rem;
+      margin: 2rem 0;
+      box-shadow: 3px 3px 8px rgba(0,0,0,0.2);
+      transform: rotate(-1deg);
+      position: relative;
+      max-width: 400px;
+      font-size: 0.95rem;
+    }
+
+    .sticky-note::before {
+      content: '📍';
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 1.5rem;
     }
 
     /* ---------------------------
@@ -178,61 +404,112 @@
     ----------------------------*/
     footer {
       text-align: center;
-      font-size: 0.8rem;
+      padding: 2rem 0;
       color: var(--gray);
-      padding: 1rem 0 3rem 0;
+      font-size: 0.85rem;
+      border-top: 2px dashed var(--gray);
+      margin-top: 3rem;
+    }
+
+    /* ---------------------------
+       RESPONSIVE
+    ----------------------------*/
+    @media (max-width: 768px) {
+      body::before {
+        display: none;
+      }
+
+      .container {
+        padding-left: 1rem;
+      }
+
+      .character-guide {
+        width: 100px;
+        bottom: 20px;
+        right: 20px;
+      }
+
+      .speech-bubble {
+        font-size: 0.75rem;
+        white-space: normal;
+        width: 150px;
+      }
+
+      .services-grid {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
 <body>
-  <!-- Encabezado -->
-  <header class="header">
-    <div class="logo-container">
-      <div class="logo-bg">
+  <div class="container">
+    <!-- HEADER -->
+    <header class="header">
+      <div class="logo-wrapper">
         <img src="/dollzy-web/assets/logo.png" alt="Dollzy Design Studio" class="logo-img" />
       </div>
-    </div>
-    <img src="/dollzy-web/assets/character.png" alt="Dollzy character" class="character-img" />
-  </header>
+    </header>
 
-  <!-- Navegación -->
-  <nav>
-    <a href="#asesoria">Asesoría personalizada</a>
-    <a href="#transformar">Transformar prendas</a>
-    <a href="#confeccion">Confección desde cero</a>
-  </nav>
+    <!-- PESTAÑAS DE NAVEGACIÓN -->
+    <nav class="tabs-container">
+      <a href="#asesoria" class="tab">✨ Asesoría Personalizada</a>
+      <a href="#transformar" class="tab">♻️ Transformar Prendas</a>
+      <a href="#confeccion" class="tab">✂️ Confección desde Cero</a>
+    </nav>
 
-  <!-- Sección servicios -->
-  <section id="servicios">
-    <h2>Servicios</h2>
-    <div class="card-grid">
-      <div class="card">
-        <h3>Asesoría personalizada</h3>
-        <p>
-          Te acompaño en estilo, talles y materiales. Moodboards y plan de outfit con tu sello.
-        </p>
-        <button>+ Info</button>
+    <!-- SECCIÓN PRINCIPAL -->
+    <section class="page-section">
+      <h2 class="page-title">Mis Servicios Mágicos</h2>
+      
+      <div class="sticky-note">
+        <strong>¡Hola! 👋</strong><br>
+        Soy tu guía en Dollzy. Aquí transformamos ideas en realidad. ¡Explora mis tres servicios especiales!
       </div>
-      <div class="card">
-        <h3>Transformar prendas antiguas</h3>
-        <p>
-          Upcycling: convertimos tesoros del clóset en piezas actuales sin perder su magia.
-        </p>
-        <button>+ Info</button>
-      </div>
-      <div class="card">
-        <h3>Confección personalizada desde cero</h3>
-        <p>
-          Ideamos y cosemos tu prenda soñada: patronaje, pruebas y entrega final.
-        </p>
-        <button>+ Info</button>
-      </div>
-    </div>
-  </section>
 
-  <!-- Footer -->
-  <footer>
-    <p>© 2025 Dollzy Design Studio — Inspirado en libretas mágicas y estilo Pascualina</p>
-  </footer>
+      <div class="services-grid">
+        <!-- Servicio 1 -->
+        <div class="service-card" id="asesoria">
+          <span class="service-icon">💜</span>
+          <h3>Asesoría Personalizada</h3>
+          <p>
+            Te acompaño en estilo, talles y materiales perfectos para ti. Creamos moodboards y planes de outfit con tu esencia única.
+          </p>
+          <button class="service-btn">Más Info ➜</button>
+        </div>
+
+        <!-- Servicio 2 -->
+        <div class="service-card" id="transformar">
+          <span class="service-icon">✨</span>
+          <h3>Transformar Prendas Antiguas</h3>
+          <p>
+            Upcycling mágico: convertimos tesoros escondidos de tu clóset en piezas actuales sin perder su historia y magia.
+          </p>
+          <button class="service-btn">Más Info ➜</button>
+        </div>
+
+        <!-- Servicio 3 -->
+        <div class="service-card" id="confeccion">
+          <span class="service-icon">✂️</span>
+          <h3>Confección Desde Cero</h3>
+          <p>
+            Ideamos y cosemos tu prenda soñada: patronaje profesional, pruebas personalizadas y entrega final impecable.
+          </p>
+          <button class="service-btn">Más Info ➜</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <p>✨ © 2025 Dollzy Design Studio — Donde la magia y la moda se encuentran ✨</p>
+      <p style="font-size: 0.75rem; margin-top: 0.5rem;">Inspirado en libretas mágicas y estilo Pascualina</p>
+    </footer>
+  </div>
+
+  <!-- PERSONAJE GUÍA FLOTANTE -->
+  <div class="character-guide">
+    <div class="speech-bubble">¡Haz hover sobre mí! 👋</div>
+    <img src="/dollzy-web/assets/character.png" alt="Dollzy - Tu guía mágica" />
+  </div>
 </body>
 </html>
