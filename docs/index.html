@@ -1,272 +1,238 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Dollzy — Estudio de Diseño & Costura</title>
-  <meta name="description" content="Asesoría personalizada, transformación de prendas y confección a medida. Estética libreta antigua con vibes Pascualina." />
-  <meta property="og:title" content="Dollzy — Estudio de Diseño & Costura" />
-  <meta property="og:description" content="Asesoría personalizada, transformación de prendas y confección a medida." />
-  <meta property="og:type" content="website" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <!-- Handwritten + Retro serif -->
-  <link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Gloock&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dollzy Design Studio</title>
+  <link rel="icon" type="image/png" href="../assets/logo.png" />
   <style>
-    /* =========================
-       PALETA (aprox a PANTONE)
-       ========================= */
-    :root{
-      --black:#1a1a1a;                     /* Process Black C */
-      --lime:#D5E04E;                      /* 387 XGC */
-      --red:#E02722;                       /* 485 XGC */
-      --pink:#E58AB4;                      /* 211 XGC */
-      --plum:#5B1846;                      /* 229 XGC */
-      --violet:#3D3C8D;                    /* 2119 XGC */
-      --indigo:#3A4AA3;                    /* 2081 XGC */
-      --coolgray:#7A7A7A;                  /* Cool Gray 9 XGC */
-      --lavender:#BEB7D6;                  /* 663 XGC */
-      --paper:#fffaf2;                     /* tono libreta envejecida */
-      --ink:#222;                          
-      --shadow:0 12px 24px rgba(0,0,0,.25);
-      --shadow-sm:0 6px 12px rgba(0,0,0,.18);
-      --radius:18px;
+    /* ---------------------------
+       PALETA DE COLORES PANTONE
+    ----------------------------*/
+    :root {
+      --black: #1e1e1e;           /* Process Black C */
+      --lime: #d7df23;            /* 387 XGC */
+      --red: #da291c;             /* 485 XGC */
+      --pink: #e57ea6;            /* 211 XGC */
+      --purple: #662d91;          /* 229 XGC */
+      --violet: #3b3c8f;          /* 2119 XGC */
+      --blue: #2a44d0;            /* 2081 XGC */
+      --gray: #7c7f83;            /* Cool Gray 9 XGC */
+      --lavender: #d6d0e5;        /* 663 XGC */
+      --paper: #fffdf7;           /* Fondo tipo libreta */
     }
 
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0; color:var(--ink); background:var(--black); 
-      font-family:"Special Elite", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-      line-height:1.6; overflow-x:hidden;
+    /* ---------------------------
+       ESTILO GENERAL
+    ----------------------------*/
+    body {
+      font-family: "Courier New", monospace;
+      background: var(--paper)
+        linear-gradient(to bottom, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
+      background-size: 100% 24px;
+      color: var(--black);
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
     }
 
-    /* ======= Fondo LIBRETA con líneas y perforaciones ======= */
-    .notebook{
-      position:relative; min-height:100%;
-      background:
-        /* patrones morados (opcional si subes pattern.png) */
-        url('assets/pattern.png') center/700px repeat,
-        /* líneas horizontales */
-        repeating-linear-gradient(
-          to bottom,
-          rgba(123,116,160,.25) 0px,
-          rgba(123,116,160,.25) 2px,
-          transparent 2px,
-          transparent 44px
-        ),
-        /* margen rosado tipo cuaderno */
-        linear-gradient(90deg, rgba(229,138,180,.35) 0 68px, transparent 68px 100%),
-        var(--paper);
-    }
-    /* taladros del cuaderno */
-    .notebook:before{
-      content:""; position:fixed; left:16px; top:0; bottom:0; width:12px;
-      background:
-        radial-gradient(circle at 6px 40px, #e8e1d4 0 5px, transparent 5px),
-        radial-gradient(circle at 6px 120px, #e8e1d4 0 5px, transparent 5px),
-        radial-gradient(circle at 6px 200px, #e8e1d4 0 5px, transparent 5px),
-        radial-gradient(circle at 6px 280px, #e8e1d4 0 5px, transparent 5px),
-        radial-gradient(circle at 6px 360px, #e8e1d4 0 5px, transparent 5px);
-      mix-blend-mode:multiply; opacity:.8; pointer-events:none;
+    /* ---------------------------
+       HEADER: LOGO + PERSONAJE
+    ----------------------------*/
+    .header {
+      position: relative;
+      text-align: center;
+      margin-top: 2rem;
+      margin-bottom: 3rem;
     }
 
-    /* ======= NAV tipo pestañas ======= */
-    .tabs{
-      position:sticky; top:0; z-index:5;
-      display:flex; gap:8px; align-items:flex-end; justify-content:center;
-      padding:10px; background:linear-gradient(180deg, rgba(0,0,0,.6), rgba(0,0,0,0));
-    }
-    .tab{
-      --c:var(--violet);
-      font-family:"Gloock", serif; letter-spacing:.5px;
-      background:var(--paper); color:var(--black);
-      border-radius:12px 12px 0 0; padding:10px 16px; text-decoration:none;
-      box-shadow:var(--shadow-sm); border:2px solid var(--black);
-      position:relative; top:6px; transition:transform .2s ease, top .2s ease;
-    }
-    .tab:nth-child(1){--c:var(--lime)}
-    .tab:nth-child(2){--c:var(--pink)}
-    .tab:nth-child(3){--c:var(--indigo); color:#fff; background:var(--indigo)}
-    .tab:before{content:""; position:absolute; inset:0; border-radius:12px 12px 0 0;
-      box-shadow:0 6px 0 var(--c); opacity:.9; pointer-events:none}
-    .tab:hover{transform:translateY(-3px)}
-
-    /* ======= CONTENEDORES tipo hojas pegadas ======= */
-    .page{max-width:1000px; margin:60px auto; padding:28px; position:relative}
-    .sheet{
-      background:var(--paper); border:2px solid var(--black); border-radius:var(--radius);
-      box-shadow:var(--shadow); padding:28px; position:relative;
-    }
-    .sheet:before, .sheet:after{content:""; position:absolute; width:120px; height:32px; top:-12px;
-      background:var(--lime); border:2px solid var(--black); border-bottom:none; border-radius:12px 12px 0 0;
-      transform:rotate(-2deg); box-shadow:0 6px 0 rgba(0,0,0,.15);
-    }
-    .sheet:after{right:16px; left:auto; background:var(--pink); transform:rotate(3deg)}
-
-    h1,h2,h3{font-family:"Gloock", serif; margin:0 0 .5rem}
-    h1{font-size: clamp(2rem, 5vw, 3.2rem);}
-    h2{font-size: clamp(1.5rem, 4vw, 2.2rem);}
-
-    /* ======= HERO / portada ======= */
-    header.cover{position:relative; padding:80px 20px 20px}
-    .logo-wrap{
-      display:flex; align-items:center; justify-content:center; gap:16px; flex-direction:column;
-    }
-    .logo-sticker{
-      background:#111; padding:16px 22px; border-radius:24px; border:2px solid #fff; 
-      box-shadow:var(--shadow); position:relative; isolation:isolate;
-    }
-    .logo-sticker:after{content:"*25"; font-family:"Gloock", serif; color:#eee; position:absolute; right:-34px; top:8px}
-    .logo-img{max-width:min(560px,80vw); display:block; filter:drop-shadow(0 12px 18px rgba(0,0,0,.6));}
-    .tagline{color:#fff; text-align:center; margin-top:10px; font-size:1.05rem}
-
-    /* ======= GRID servicios (3 opciones) ======= */
-    .services{display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:18px; margin-top:12px}
-    .card{
-      background:var(--lavender); border:2px solid var(--black); border-radius:16px; padding:18px;
-      box-shadow:var(--shadow-sm); position:relative; overflow:hidden
-    }
-    .card h3{margin-top:.2rem}
-    .card .tape{position:absolute; width:120px; height:30px; left:10px; top:-10px; background:var(--lime); 
-      border:2px dashed var(--black); transform:rotate(-8deg); opacity:.9}
-    .card:nth-child(2){background:var(--pink)}
-    .card:nth-child(2) .tape{background:var(--red)}
-    .card:nth-child(3){background:var(--violet); color:#fff}
-    .card:nth-child(3) .tape{background:var(--lime)}
-
-    .card p{margin:.5rem 0 1rem}
-    .btn{display:inline-block; text-decoration:none; padding:10px 14px; border:2px solid var(--black); border-radius:12px; font-weight:700; background:var(--lime); color:#111}
-    .btn:hover{filter:brightness(0.95)}
-
-    /* sticker personaje */
-    .character{
-      position:absolute; right:-16px; bottom:-14px; width:min(220px,30vw); transform:rotate(2deg);
-      filter:drop-shadow(0 8px 12px rgba(0,0,0,.3));
+    .logo-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
-    /* ======= Secciones ======= */
-    section{scroll-margin-top:100px}
-    .section-title{display:flex; align-items:center; gap:10px; margin-bottom:10px}
-    .section-title .dot{width:12px; height:12px; border-radius:50%; background:var(--lime); border:2px solid var(--black)}
+    .logo-bg {
+      background-color: #000;
+      padding: 1rem 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+      display: inline-block;
+    }
 
-    /* ======= Footer ======= */
-    footer{margin:80px 0 40px; text-align:center; color:#eee}
-    footer small{opacity:.85}
+    .logo-img {
+      width: clamp(220px, 50%, 480px);
+      height: auto;
+      display: block;
+    }
 
-    /* ======= Responsive tweaks ======= */
-    @media (max-width:640px){
-      .sheet:before,.sheet:after{display:none}
+    .character-img {
+      display: block;
+      margin: 2rem auto 0 auto;
+      width: clamp(180px, 30%, 300px);
+      height: auto;
+      filter: drop-shadow(0 3px 4px rgba(0, 0, 0, 0.3));
+    }
+
+    /* ---------------------------
+       NAV: OPCIONES DE SERVICIOS
+    ----------------------------*/
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+    }
+
+    nav a {
+      text-decoration: none;
+      font-weight: bold;
+      padding: 0.5rem 1.5rem;
+      border-radius: 6px;
+      box-shadow: 2px 2px 0 var(--black);
+      transition: transform 0.2s ease;
+    }
+
+    nav a:hover {
+      transform: translateY(-3px);
+    }
+
+    nav a:nth-child(1) {
+      background: var(--lime);
+      color: var(--black);
+    }
+    nav a:nth-child(2) {
+      background: var(--pink);
+      color: var(--black);
+    }
+    nav a:nth-child(3) {
+      background: var(--blue);
+      color: #fff;
+    }
+
+    /* ---------------------------
+       SECCIONES
+    ----------------------------*/
+    section {
+      width: min(900px, 90%);
+      background: #fffdfc;
+      margin: 3rem auto;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      padding: 2rem;
+      position: relative;
+    }
+
+    section h2 {
+      font-size: 1.6rem;
+      font-weight: bold;
+      position: relative;
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      background: var(--lime);
+      border-radius: 6px;
+      margin-top: 0;
+    }
+
+    .card-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .card {
+      flex: 1 1 250px;
+      border: 2px solid var(--black);
+      border-radius: 10px;
+      padding: 1rem;
+      position: relative;
+      box-shadow: 2px 3px 0 var(--black);
+    }
+
+    .card:nth-child(1) {
+      background: var(--lavender);
+    }
+    .card:nth-child(2) {
+      background: var(--pink);
+    }
+    .card:nth-child(3) {
+      background: var(--violet);
+      color: white;
+    }
+
+    .card button {
+      margin-top: 0.75rem;
+      background: var(--lime);
+      border: none;
+      font-weight: bold;
+      border-radius: 4px;
+      padding: 0.3rem 1rem;
+      box-shadow: 1px 2px 0 var(--black);
+      cursor: pointer;
+    }
+
+    /* ---------------------------
+       FOOTER
+    ----------------------------*/
+    footer {
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--gray);
+      padding: 1rem 0 3rem 0;
     }
   </style>
 </head>
 <body>
-  <div class="notebook">
-    <!-- NAV PESTAÑAS -->
-    <nav class="tabs" aria-label="Secciones">
-      <a class="tab" href="#asesoria">Asesoría personalizada</a>
-      <a class="tab" href="#transformar">Transformar prendas</a>
-      <a class="tab" href="#confeccion">Confección desde cero</a>
-    </nav>
-
-    <!-- PORTADA-->
-    <header class="cover page">
-      <div class="logo-wrap">
-        <div class="logo-sticker sheet">
-          <!-- Sube tu logo como assets/logo.png (segundo archivo) -->
-          <img class="logo-img" src="assets/logo.png" alt="Dollzy Design Studio" />
-        </div>
-        <p class="tagline">Diseño con actitud — inspirado en libretas antiguas y vibes <em>Pascualina</em>.</p>
+  <!-- Encabezado -->
+  <header class="header">
+    <div class="logo-container">
+      <div class="logo-bg">
+        <img src="../assets/logo.png" alt="Dollzy Design Studio" class="logo-img" />
       </div>
-    </header>
+    </div>
+    <img src="../assets/character.png" alt="Dollzy character" class="character-img" />
+  </header>
 
-    <!-- SECCIÓN: servicios (vista rápida) -->
-    <main class="page">
-      <div class="sheet">
-        <div class="section-title"><span class="dot"></span><h2>Servicios</h2></div>
-        <div class="services">
-          <article class="card">
-            <div class="tape" aria-hidden="true"></div>
-            <h3>Asesoría personalizada</h3>
-            <p>Te acompaño en estilo, talles y materiales. Moodboards y plan de outfit con tu sello.</p>
-            <a class="btn" href="#asesoria">+ Info</a>
-          </article>
-          <article class="card">
-            <div class="tape" aria-hidden="true"></div>
-            <h3>Transformar prendas antiguas</h3>
-            <p>Upcycling: convertimos tesoros del clóset en piezas actuales sin perder su magia.</p>
-            <a class="btn" href="#transformar">+ Info</a>
-          </article>
-          <article class="card">
-            <div class="tape" aria-hidden="true"></div>
-            <h3>Confección personalizada desde cero</h3>
-            <p>Ideamos y cosemos tu prenda soñada: patronaje, pruebas y entrega final.</p>
-            <a class="btn" href="#confeccion">+ Info</a>
-          </article>
-        </div>
-        <!-- Sticker del personaje (tercer archivo) -->
-        <img class="character" src="assets/character.png" alt="Personaje estilo gótica cute" />
-      </div>
-    </main>
+  <!-- Navegación -->
+  <nav>
+    <a href="#asesoria">Asesoría personalizada</a>
+    <a href="#transformar">Transformar prendas</a>
+    <a href="#confeccion">Confección desde cero</a>
+  </nav>
 
-    <!-- DETALLE: ASESORÍA -->
-    <section id="asesoria" class="page">
-      <div class="sheet">
-        <div class="section-title"><span class="dot"></span><h2>Asesoría personalizada</h2></div>
+  <!-- Sección servicios -->
+  <section id="servicios">
+    <h2>Servicios</h2>
+    <div class="card-grid">
+      <div class="card">
+        <h3>Asesoría personalizada</h3>
         <p>
-          Sesión 1:1 para definir objetivos, colores, siluetas y referencias. Entrego una guía digital con
-          propuestas, bocetos rápidos y lista de compras si hace falta.
+          Te acompaño en estilo, talles y materiales. Moodboards y plan de outfit con tu sello.
         </p>
-        <ul>
-          <li>Duración: 60–90 min (virtual o presencial).</li>
-          <li>Incluye moodboard con la paleta (¡lime + morados + pink!).</li>
-          <li>Seguimiento por email durante 7 días.</li>
-        </ul>
-        <a class="btn" href="mailto:contacto@tusitio.com?subject=Asesor%C3%ADa%20personalizada">Quiero mi asesoría</a>
+        <button>+ Info</button>
       </div>
-    </section>
-
-    <!-- DETALLE: TRANSFORMAR PRENDAS -->
-    <section id="transformar" class="page">
-      <div class="sheet">
-        <div class="section-title"><span class="dot"></span><h2>Transformar prendas antiguas</h2></div>
+      <div class="card">
+        <h3>Transformar prendas antiguas</h3>
         <p>
-          Trae esa prenda con historia y la reimaginamos: bordados, apliques, cortes, tintes o mix de textiles.
-          Inspiración gráfica con murciélagos, corazones y patrones pop oscuros.
+          Upcycling: convertimos tesoros del clóset en piezas actuales sin perder su magia.
         </p>
-        <ul>
-          <li>Evaluación de pieza + propuesta de intervención.</li>
-          <li>Presupuesto por etapas; reutilizamos lo máximo posible.</li>
-          <li>Antes / Después documentado para tu archivo.</li>
-        </ul>
-        <a class="btn" href="mailto:contacto@tusitio.com?subject=Transformar%20prenda">Quiero transformar</a>
+        <button>+ Info</button>
       </div>
-    </section>
-
-    <!-- DETALLE: CONFECCIÓN -->
-    <section id="confeccion" class="page">
-      <div class="sheet">
-        <div class="section-title"><span class="dot"></span><h2>Confección personalizada desde cero</h2></div>
+      <div class="card">
+        <h3>Confección personalizada desde cero</h3>
         <p>
-          Desde la idea a la prenda final: diseño, moldería, pruebas y acabado. Todo en comunicación directa 
-          para que el resultado sea 100% tú.
+          Ideamos y cosemos tu prenda soñada: patronaje, pruebas y entrega final.
         </p>
-        <ul>
-          <li>Boceto + selección de telas y avíos.</li>
-          <li>Prueba de calce y ajustes.</li>
-          <li>Entrega con recomendaciones de cuidado.</li>
-        </ul>
-        <a class="btn" href="mailto:contacto@tusitio.com?subject=Confecci%C3%B3n%20a%20medida">Solicitar confección</a>
+        <button>+ Info</button>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <footer>
-      <small>© <span id="year"></span> Dollzy — Design Studio · Hecho con ❤️ y mucha costura</small>
-    </footer>
-  </div>
-
-  <script>
-    // año dinámico
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 Dollzy Design Studio — Inspirado en libretas mágicas y estilo Pascualina</p>
+  </footer>
 </body>
 </html>
