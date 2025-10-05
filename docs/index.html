@@ -18,7 +18,7 @@
       --blue: #2a44d0;
       --gray: #7c7f83;
       --lavender: #d6d0e5;
-      --paper: #f5f0e8;
+      --paper: #482d54;
     }
 
     * {
@@ -32,12 +32,12 @@
     ----------------------------*/
     body {
       font-family: "Courier New", monospace;
-      background: linear-gradient(to right, #ddd 1px, transparent 1px),
-                  linear-gradient(to bottom, rgba(0,0,0,0.03) 1px, transparent 1px),
+      background: linear-gradient(to right, rgba(255,255,255,0.1) 1px, transparent 1px),
+                  linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px),
                   var(--paper);
       background-size: 40px 100%, 100% 28px, 100% 100%;
       background-position: 60px 0, 0 0, 0 0;
-      color: var(--black);
+      color: var(--paper);
       padding: 2rem 1rem;
       min-height: 100vh;
       position: relative;
@@ -52,13 +52,13 @@
       width: 20px;
       height: 100%;
       background: 
-        radial-gradient(circle, #888 30%, transparent 31%) 0 40px,
-        radial-gradient(circle, #888 30%, transparent 31%) 0 140px,
-        radial-gradient(circle, #888 30%, transparent 31%) 0 240px,
-        radial-gradient(circle, #888 30%, transparent 31%) 0 340px,
-        radial-gradient(circle, #888 30%, transparent 31%) 0 440px,
-        radial-gradient(circle, #888 30%, transparent 31%) 0 540px,
-        radial-gradient(circle, #888 30%, transparent 31%) 0 640px;
+        radial-gradient(circle, rgba(255,255,255,0.3) 30%, transparent 31%) 0 40px,
+        radial-gradient(circle, rgba(255,255,255,0.3) 30%, transparent 31%) 0 140px,
+        radial-gradient(circle, rgba(255,255,255,0.3) 30%, transparent 31%) 0 240px,
+        radial-gradient(circle, rgba(255,255,255,0.3) 30%, transparent 31%) 0 340px,
+        radial-gradient(circle, rgba(255,255,255,0.3) 30%, transparent 31%) 0 440px,
+        radial-gradient(circle, rgba(255,255,255,0.3) 30%, transparent 31%) 0 540px,
+        radial-gradient(circle, rgba(255,255,255,0.3) 30%, transparent 31%) 0 640px;
       background-size: 8px 8px;
       background-repeat: no-repeat;
       z-index: 10;
@@ -405,9 +405,9 @@
     footer {
       text-align: center;
       padding: 2rem 0;
-      color: var(--gray);
+      color: rgba(255,255,255,0.6);
       font-size: 0.85rem;
-      border-top: 2px dashed var(--gray);
+      border-top: 2px dashed rgba(255,255,255,0.3);
       margin-top: 3rem;
     }
 
@@ -462,7 +462,7 @@
       <h2 class="page-title">Servicios</h2>
       
       <div class="sticky-note">
-        <strong>¡Hola! 👋</strong><br>
+        <strong>Hola (˶˃ ᵕ ˂˶)</strong><br>
         Soy tu guía en Dollzy. Aquí transformamos ideas en realidad. ¡Explora mis tres servicios especiales!
       </div>
 
@@ -509,7 +509,7 @@
   <!-- PERSONAJE GUÍA FLOTANTE -->
   <div class="character-guide">
     <div class="speech-bubble">¡Haz hover sobre mí! 👋</div>
-    <img src="assets/character.png" alt="Dollzy - Guía" />
+    <img src="assets/character.png" alt="Dollzy - Tu guía" />
   </div>
 </body>
 </html>
